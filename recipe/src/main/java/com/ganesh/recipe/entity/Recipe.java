@@ -21,7 +21,7 @@ public class Recipe {
     private Integer prep_time;
     private Integer cook_time;
     private Integer total_time;
-    @Embedded
+    @Embedded // this acts as self join of two entity to form as single entity
     private Nutrients nutrients;
     private String serves;
 }

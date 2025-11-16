@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Embeddable
+@Embeddable // this acts as self join of two entity to form as single entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Nutrients {
     private String calories;
