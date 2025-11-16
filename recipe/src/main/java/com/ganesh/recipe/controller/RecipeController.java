@@ -1,6 +1,7 @@
 package com.ganesh.recipe.controller;
 
 //import com.ganesh.recipe.entity.Recipe;
+import com.ganesh.recipe.entity.Recipe;
 import com.ganesh.recipe.service.RecipeService;
 import org.springframework.batch.core.JobParametersInvalidException;
 import org.springframework.batch.core.repository.JobExecutionAlreadyRunningException;
@@ -25,17 +26,27 @@ public class RecipeController {
         recipeService.saveDataToDB();
     }
 
-//    @GetMapping("/recipes")
-//    public List<Recipe> fetchRecipe(@RequestParam("page") Long page, @RequestParam("limit") Long limit){
-//        return recipeService.fetchRecipe(page,limit);
-//    }
-//
-//    @GetMapping("/recipes/search")
-//    public Page<Recipe> fetchRecipeByFilters(@RequestParam(defaultValue = "100",required = false) String calories,
-//                                             @RequestParam(defaultValue = "title",required = false) String title,
-//                                             @RequestParam(defaultValue = "100",required = false) String rating,
-//                                             @RequestParam("page") Integer page,
-//                                             @RequestParam("limit") Integer limit){
-//        return recipeService.fetchRecipeByFilters(calories,title,rating,page,limit);
-//    }
+    @GetMapping("/recipes")
+    public List<Recipe> fetchRecipe(@RequestParam("page") Long page, @RequestParam("limit") Long limit){
+        return recipeService.fetchRecipe(page,limit);
+    }
+
+    @GetMapping("/recipes/search")
+    public Page<Recipe> fetchRecipeByFilters(@RequestParam(required = false) String calories,
+                                             @RequestParam(required = false) String title,
+                                             @RequestParam(required = false) String cuisine,
+                                             @RequestParam(required = false) String total_time,
+                                             @RequestParam(required = false) String rating,
+                                             @RequestParam("page") int page,
+                                             @RequestParam("limit") int limit){
+        return recipeService.filterRecipes(
+                calories,
+                title,
+                cuisine,
+                total_time,
+                rating,
+                page,
+                limit
+        );
+    }
 }
